@@ -14,6 +14,8 @@ description: Maintain test strategy across unit, integration, and end-to-end sco
 1. Keep tests deterministic and local.
 2. Add at least one end-to-end test for each CLI-visible feature.
 3. Write a failing test before bug fixes whenever possible.
+4. Maintain unit tests for cross-cutting modules:
+   `settings.py`, `logging.py`, `async_runner.py`, `exceptions.py`.
 
 ## Commands
 - `uv run pytest`

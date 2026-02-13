@@ -17,3 +17,4 @@ description: Maintain developer tooling and quality gates (uv, ruff, ty, pre-com
 5. `uv run pytest -m integration`
 6. `uv run pytest -m end2end`
 7. `uv run pre-commit run --all-files`
+8. Keep `settings.py` + `logging.py` aligned so logger behavior follows env config.
