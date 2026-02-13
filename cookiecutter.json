@@ -1,0 +1,26 @@
+{
+  "project_name": "my-awesome-package",
+  "project_slug": "{{ cookiecutter.project_name|lower|replace(' ', '-')|replace('_', '-') }}",
+  "package_name": "{{ cookiecutter.project_slug|replace('-', '_') }}",
+  "project_short_description": "A Python package generated from a modern cookiecutter.",
+  "github_username": "Guillaume-Lombardo",
+  "author_full_name": "Guillaume Lombardo",
+  "author_email": "g1lom@later.day",
+  "python_version": "3.13",
+  "version": "0.1.0",
+  "minimum_coverage": "80",
+  "license": [
+    "MIT",
+    "Apache-2.0",
+    "BSD-3-Clause",
+    "Proprietary"
+  ],
+  "create_github_actions": [
+    "yes",
+    "no"
+  ],
+  "publish_target_default": [
+    "pypi",
+    "testpypi"
+  ]
+}
