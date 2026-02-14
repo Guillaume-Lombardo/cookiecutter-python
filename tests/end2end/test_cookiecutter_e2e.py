@@ -62,6 +62,29 @@ def _cleanup_repo_artifacts(repo_root: Path) -> None:
     shutil.rmtree(repo_root / "tests" / "end2end" / "__pycache__", ignore_errors=True)
 
 
+def _assert_no_legacy_repository_references(project_dir: Path) -> None:
+    """Ensure generated project contains no hardcoded legacy-repo references."""
+    forbidden_terms = [
+        "theme-extractor",
+        "KeyBERT",
+        "BERTopic",
+        "MBAD",
+        "Elasticsearch/OpenSearch",
+    ]
+    skip_parts = {".git", ".venv", "__pycache__", "htmlcov", "dist", "build"}
+
+    for path in project_dir.rglob("*"):
+        if not path.is_file():
+            continue
+        if any(part in skip_parts for part in path.parts):
+            continue
+        if path.suffix in {".pyc", ".png", ".jpg", ".jpeg", ".gif", ".ico"}:
+            continue
+        content = path.read_text(encoding="utf-8", errors="ignore")
+        for term in forbidden_terms:
+            assert term not in content, f"Found legacy reference '{term}' in {path}"
+
+
 @pytest.mark.end2end
 def test_cookiecutter_generates_precommit_clean_package_with_high_coverage(tmp_path: Path) -> None:
     """Generate a package from template, run quality gates, and cleanup artifacts."""
@@ -88,6 +111,7 @@ def test_cookiecutter_generates_precommit_clean_package_with_high_coverage(tmp_p
 
         assert project_dir.exists()
         assert (project_dir / "pyproject.toml").exists()
+        _assert_no_legacy_repository_references(project_dir)
 
         _run(["git", "init"], cwd=project_dir)
         _run(["git", "checkout", "-b", "e2e"], cwd=project_dir)
