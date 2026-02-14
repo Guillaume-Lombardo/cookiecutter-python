@@ -3,7 +3,9 @@
 Use this skill when the user says a PR review has been done and asks to process reviewer comments.
 
 ## Goal
+
 Process GitHub PR review comments end-to-end:
+
 1. fetch review threads/comments,
 2. assess validity,
 3. implement fixes when appropriate,
@@ -11,6 +13,7 @@ Process GitHub PR review comments end-to-end:
 5. resolve addressed threads.
 
 ## Workflow
+
 1. Identify current branch and linked open PR.
 2. After creating/updating the PR, wait 60 seconds before the first status check.
 3. Poll every 60 seconds until BOTH conditions are met:
@@ -38,6 +41,8 @@ Process GitHub PR review comments end-to-end:
 11. Report what was fixed, which threads were resolved, and what was intentionally not changed.
 
 ## Thread resolution note
+
 Only resolve a thread when:
+
 - code or docs were actually updated to address it, or
 - a clear rationale is provided in PR discussion for rejecting it.

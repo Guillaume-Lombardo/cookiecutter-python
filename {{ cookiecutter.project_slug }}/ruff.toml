@@ -106,7 +106,7 @@ ignore = [
 ]
 
 [lint.per-file-ignores]
-"**/tests/**/*.py" = ["ANN001", "ANN201", "D103", "S101", "SLF001"]
+"**/tests/**/*.py" = ["ANN001", "ANN201", "D103", "PLR2004", "S101", "SLF001"]
 "scripts/*.py" = ["T201", "T203"]
 "launch_*.py" = ["T201", "T203"]
 "**/__init__.py" = ["D104"]

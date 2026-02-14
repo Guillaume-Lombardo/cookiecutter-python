@@ -6,9 +6,11 @@ description: Apply Python coding standards, typing discipline, and readability r
 # Code Style Skill
 
 ## Purpose
+
 Keep code consistent, typed, and easy to maintain.
 
 ## Standards
+
 - Use Python 3.13+ idioms.
 - Type public interfaces explicitly.
 - Keep functions small and focused.
@@ -16,6 +18,7 @@ Keep code consistent, typed, and easy to maintain.
 - Add comments only when logic is non-obvious.
 
 ## Conventions
+
 - Separate models/config/protocols from runtime services.
 - Use `pydantic` for input and config validation.
 - Raise explicit domain exceptions.
@@ -26,11 +29,13 @@ Keep code consistent, typed, and easy to maintain.
 - Use Google-style docstrings with explicit argument and return types to keep Sphinx generation reliable.
 
 ## Static Checks
+
 - Formatting: Ruff formatter.
 - Linting: Ruff.
 - Type checking: Ty.
 
 ## Commands
+
 - `uv run ruff format .`
 - `uv run ruff check .`
 - `uv run ty check src tests`

@@ -10,14 +10,22 @@ from {{ cookiecutter.package_name }}.settings import get_settings
 
 
 def build_parser() -> argparse.ArgumentParser:
-    """Create the command-line parser."""
+    """Create the command-line parser.
+
+    Returns:
+        argparse.ArgumentParser: The configured argument parser.
+    """
     parser = argparse.ArgumentParser(prog="{{ cookiecutter.project_slug }}")
     parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser
 
 
 def main() -> int:
-    """Run the CLI."""
+    """Run the CLI.
+
+    Returns:
+        int: Exit code (0 for success).
+    """
     parser = build_parser()
     parser.parse_args()
     configure_logging(settings=get_settings())

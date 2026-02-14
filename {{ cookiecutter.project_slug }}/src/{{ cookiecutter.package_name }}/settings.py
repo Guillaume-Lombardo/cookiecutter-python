@@ -29,8 +29,15 @@ class Settings(BaseSettings):
 
 @lru_cache(maxsize=1)
 def get_settings() -> Settings:
-    """Return cached settings instance."""
+    """Return cached settings instance.
+
+    Raises:
+        SettingsError: If settings cannot be loaded or validated.
+
+    Returns:
+        Settings: The loaded settings instance.
+    """
     try:
         return Settings()
-    except Exception as exc:  # noqa: BLE001
-        raise SettingsError(f"Failed to load settings: {exc}") from exc
+    except Exception as exc:
+        raise SettingsError(exc=exc) from exc

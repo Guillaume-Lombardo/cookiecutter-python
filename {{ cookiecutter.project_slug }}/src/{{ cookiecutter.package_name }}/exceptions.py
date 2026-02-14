@@ -13,19 +13,21 @@ class PackageError(Exception):
 class SettingsError(PackageError):
     """Raised when settings cannot be loaded or validated."""
 
-    message: str
+    message: str = "Failed to load settings"
+    exc: Exception | None = None
 
     def __str__(self) -> str:
         """Return error message payload."""
-        return self.message
+        return f"{self.message}: {self.exc}" if self.exc else self.message
 
 
 @dataclass(frozen=True)
 class AsyncExecutionError(PackageError):
     """Raised when an async operation fails in compatibility runner."""
 
-    message: str
+    result: BaseException
+    message: str = "Async operation failed"
 
     def __str__(self) -> str:
         """Return error message payload."""
-        return self.message
+        return f"{self.message}: {self.result}"

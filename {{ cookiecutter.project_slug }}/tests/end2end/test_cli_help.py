@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import subprocess
 import sys
+from subprocess import run as subprocess_run  # noqa: S404
 
 
 def test_cli_help() -> None:
-    result = subprocess.run(
-        [sys.executable, "-m", "{{ cookiecutter.package_name }}.cli", "--help"],
+    result = subprocess_run(  # noqa: S603
+        [sys.executable, "-m", "extractforms.cli", "--help"],
         capture_output=True,
         text=True,
         check=False,

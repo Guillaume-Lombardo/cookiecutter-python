@@ -4,12 +4,14 @@ from __future__ import annotations
 
 import logging
 import sys
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 import structlog
-from structlog.typing import EventDict
 
 from {{ cookiecutter.package_name }}.settings import Settings, get_settings
+
+if TYPE_CHECKING:
+    from structlog.typing import EventDict
 
 _LOGGING_CONFIGURED = False
 
@@ -19,7 +21,16 @@ def _rename_event_key(
     method_name: str,  # noqa: ARG001
     event_dict: EventDict,
 ) -> EventDict:
-    """Normalize structlog payload keys."""
+        """Normalize structlog payload keys.
+
+    Args:
+        logger: The logger instance (unused).
+        method_name: The logging method name (unused).
+        event_dict: The original event dictionary.
+
+    Returns:
+        The modified event dictionary with "message" key instead of "event".
+    """
     if "event" in event_dict:
         event_dict["message"] = event_dict.pop("event")
     return event_dict

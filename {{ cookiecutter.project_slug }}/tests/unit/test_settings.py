@@ -1,8 +1,11 @@
 from __future__ import annotations
 
-from pathlib import Path
+from typing import TYPE_CHECKING
 
 from {{ cookiecutter.package_name }}.settings import Settings, get_settings
+
+if TYPE_CHECKING:
+    from pathlib import Path
 
 
 def test_settings_load_from_env_file(tmp_path: Path, monkeypatch) -> None:
