@@ -21,7 +21,7 @@ def _rename_event_key(
     method_name: str,  # noqa: ARG001
     event_dict: EventDict,
 ) -> EventDict:
-        """Normalize structlog payload keys.
+    """Normalize structlog payload keys.
 
     Args:
         logger: The logger instance (unused).
