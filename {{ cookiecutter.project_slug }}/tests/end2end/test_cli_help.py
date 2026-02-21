@@ -6,7 +6,7 @@ from subprocess import run as subprocess_run  # noqa: S404
 
 def test_cli_help() -> None:
     result = subprocess_run(  # noqa: S603
-        [sys.executable, "-m", "extractforms.cli", "--help"],
+        [sys.executable, "-m", "{{ cookiecutter.package_name }}.cli", "--help"],
         capture_output=True,
         text=True,
         check=False,

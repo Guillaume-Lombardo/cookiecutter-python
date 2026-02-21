@@ -1,0 +1,29 @@
+name: Cookiecutter E2E
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    name: Generate Template And Run Quality Gates
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Run cookiecutter end-to-end verification
+        run: uvx --from pytest pytest -m end2end tests/end2end/test_cookiecutter_e2e.py -q
