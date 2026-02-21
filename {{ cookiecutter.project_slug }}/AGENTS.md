@@ -6,8 +6,9 @@ Build and maintain a robust Python package with clear contracts, high code quali
 ## Current Stage
 This template includes AI delivery tooling:
 - agent governance (`agent.md`)
-- execution roadmap (`plan.md`)
+- collaborative planning workspace (`plan.md`)
 - reusable project skills (`skills/*`)
+- LLM workflow index (`SKILLS.md`)
 
 ## Working Rules
 - Use English as the default language for docstrings, README, and core project artifacts.
@@ -31,14 +32,30 @@ This template includes AI delivery tooling:
 
 ## Delivery Workflow
 - Implement each run, phase, and feature in a dedicated branch created for that specific scope.
+- Before substantial implementation, run a short planning exchange with the user and write the validated plan in `plan.md`.
+- All future work must start by creating or switching to a dedicated non-`main` branch.
 - Do not develop features directly on the main branch.
 - End every run, phase, and feature delivery with a GitHub Pull Request.
 - Use PR review and CI as mandatory validation before merge.
+- For every created PR, wait for CI completion and review publication before finalizing.
+- Poll PR status every 60 seconds (`gh pr checks` + `gh pr view ...reviews/comments`) until:
+  - CI is no longer pending, and
+  - at least one review is present (or review definitively reports no review for this PR).
+- Do not stop polling right after CI success if review is still missing.
+- Evaluate review comments for technical relevance; address pertinent comments in code/tests/docs and explicitly justify non-pertinent comments in PR discussion.
 - Before each push/PR, run one explicit dead-code pass and remove unused code/paths/imports no longer referenced.
 - Before every push/PR, ensure docs/config bootstrap are synchronized with code changes:
   - update `README.md` when CLI behavior, setup, or workflow changes
   - update `.env.template` when environment variables change
   - update local `.env` accordingly for validation runs
+- Before implementation and before merge, review and respect engineering guidance in:
+  - `docs/engineering/DEFINITION_OF_DONE.md`
+  - `docs/engineering/REVIEW_RUNBOOK.md`
+  - `docs/adr/README.md`
+- Document architecture decisions in `docs/adr/` whenever a change introduces or modifies a structural/architectural choice.
+- Keep unit tests mirrored to package layout under `tests/unit/...`.
+- Example: `src/{{ cookiecutter.package_name }}/foo/bar.py` maps to `tests/unit/foo/test_bar.py`.
+- Do not modify `ruff.toml` unless the user explicitly requests it.
 
 ## Pre-PR Checklist
 Run locally:
@@ -50,10 +67,13 @@ Run locally:
 - `uv run pytest -m end2end`
 - `uv run pre-commit run --all-files`
 - Run a dead-code cleanup pass (remove unused code, stale helpers, and obsolete branches).
+- Verify Google-style docstrings include explicit types in `Args` and `Returns` for modified code paths.
+- Verify `tests/unit` structure still mirrors `src/{{ cookiecutter.package_name }}` after refactors/moves.
 - Confirm documentation/config sync:
   - `README.md` updated if behavior changed
   - `.env.template` updated if env contract changed
   - local `.env` updated for manual/e2e validation
+  - `docs/adr/*` updated when architecture decisions changed
 
 ## Skills
 Project skills live in `skills/`:

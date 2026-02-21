@@ -28,7 +28,12 @@ git push -u origin main
 - `tests/unit`: fast default tests
 - `tests/integration`: component-level tests
 - `tests/end2end`: user-facing behavior tests
+- `docs`: engineering guides and ADR records (`docs/README.md`)
 - `skills`: AI helper skills for coding workflows
+- `agent.md`: AI agent role, principles, and delivery contract
+- `AGENTS.md`: operational guardrails and pre-PR checklist
+- `plan.md`: collaborative planning workspace (scope, constraints, steps, validation)
+- `SKILLS.md`: index of local skills and when to apply them
 
 ## Release
 
